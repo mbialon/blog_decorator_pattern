@@ -7,16 +7,14 @@ import java.lang.reflect.Proxy;
 public class Decorators {
 
     public static Coffee decorate(final Coffee coffee, final Coffee decorator) {
-        return (Coffee) Proxy.newProxyInstance(Coffee.class.getClassLoader(), new Class[]{Coffee.class}, new InvocationHandler() {
-
+        InvocationHandler handler = new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Coffee target = coffee;
-                Method m = decorator.getClass().getMethod(method.getName(), method.getParameterTypes());
-                if (m.getDeclaringClass() == decorator.getClass()) {
-                    target = decorator;
-                }
+                Class<? extends Coffee> decoratorClass = decorator.getClass();
+                Method m = decoratorClass.getMethod(method.getName(), method.getParameterTypes());
+                Coffee target = m.getDeclaringClass() == decoratorClass ? decorator : coffee;
                 return method.invoke(target, args);
             }
-        });
+        };
+        return (Coffee) Proxy.newProxyInstance(Coffee.class.getClassLoader(), new Class[]{Coffee.class}, handler);
     }
 }
