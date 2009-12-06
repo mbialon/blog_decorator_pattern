@@ -2,7 +2,7 @@ package dp.proxy;
 
 public interface Coffee {
 
-    int price();
+  int price();
 
-    String name();
+  String name();
 }
