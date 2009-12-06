@@ -17,6 +17,11 @@ public class BasicTest {
         assertEquals("coffee", decorated.name());
     }
 
+    @Test
+    public void testMultiLevelDecoration() {
+        assertEquals(8, new Milk(decorated).price());
+    }
+
     @Before
     public void setUp() throws Exception {
         decorated = new Milk(new Coffee("coffee"));

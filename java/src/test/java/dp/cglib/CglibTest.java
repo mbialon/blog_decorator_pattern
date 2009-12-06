@@ -10,7 +10,6 @@ public class CglibTest {
     @Test
     public void testPriceDecoration() {
         assertEquals(6, decorated.price());
-        assertEquals(7, Sugar.add(decorated).price());
     }
 
     @Test
@@ -18,9 +17,13 @@ public class CglibTest {
         assertEquals("coffee", decorated.name());
     }
 
+    @Test
+    public void testMultiLevelDecoration() {
+        assertEquals(8, Milk.add(decorated).price());
+    }
+
     @Before
     public void setUp() throws Exception {
-        Coffee coffee = new Coffee("coffee");
-        decorated = Milk.add(coffee);
+        decorated = Milk.add(new Coffee("coffee"));
     }
 }

@@ -10,12 +10,16 @@ public class ProxyTest {
     @Test
     public void testPriceDecoration() {
         assertEquals(6, decorated.price());
-        assertEquals(7, Sugar.add(decorated).price());
     }
 
     @Test
     public void testNameDecoration() {
         assertEquals("coffee", decorated.name());
+    }
+
+    @Test
+    public void testMultiLevelDecoration() {
+        assertEquals(8, Milk.add(decorated).price());
     }
 
     @Before
