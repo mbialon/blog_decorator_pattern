@@ -1,5 +1,6 @@
-out/*
 *.ipr
 *.iws
 *.iml
 *.swp
+.DS_Store
+java/target
